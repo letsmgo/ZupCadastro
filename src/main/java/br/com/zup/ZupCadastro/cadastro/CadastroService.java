@@ -1,6 +1,7 @@
 package br.com.zup.ZupCadastro.cadastro;
 
 import br.com.zup.ZupCadastro.cadastro.exceptions.CadastroDuplicadoException;
+import br.com.zup.ZupCadastro.cadastro.exceptions.CadastroNaoExisteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,15 @@ public class CadastroService {
         }
         List<Cadastro> cadastros = (List<Cadastro>) cadastroRepository.findAll();
         return cadastros;
+    }
+
+    public void deletarCadastro(String cpf){
+        if (cadastroRepository.existsById(cpf)){
+            cadastroRepository.deleteById(cpf);
+        }else{
+            throw new CadastroNaoExisteException();
+        }
+
     }
 
 }

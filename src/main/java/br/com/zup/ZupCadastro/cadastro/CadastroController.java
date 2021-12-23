@@ -37,4 +37,11 @@ public class CadastroController {
         }
         return cadastroDto;
     }
+
+    @DeleteMapping("/{cpf}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarCadastro(@PathVariable String cpf){
+        cadastroService.deletarCadastro(cpf);
+    }
+
 }
