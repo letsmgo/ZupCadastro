@@ -44,4 +44,9 @@ public class CadastroController {
         cadastroService.deletarCadastro(cpf);
     }
 
+    @GetMapping("/{cpf}")
+    public Cadastro exibirCadastroPorCPF(@PathVariable String cpf){
+        return cadastroService.pesquisarCadastroPorCPF(cpf);
+    }
+
 }
