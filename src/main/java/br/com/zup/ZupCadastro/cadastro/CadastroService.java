@@ -1,5 +1,6 @@
 package br.com.zup.ZupCadastro.cadastro;
 
+import br.com.zup.ZupCadastro.cadastro.exceptions.CadastroDuplicadoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,10 @@ public class CadastroService {
     private CadastroRepository cadastroRepository;
 
     public Cadastro salvarCadastro(Cadastro cadastro) {
+        if (cadastroRepository.existsById(cadastro.getCpf())){
+            throw new CadastroDuplicadoException();
+        }
         cadastro.setDataDoCadastro(LocalDate.now());
-
         return cadastroRepository.save(cadastro);
     }
 
